@@ -1,0 +1,48 @@
+<mat-card class="max-w-md w-full !rounded-2xl !shadow-xl !overflow-hidden !border !border-slate-200 !bg-white">
+
+  <!-- Cabeçalho -->
+  <mat-card-header class="!bg-slate-900 !text-white !p-6 !flex !items-center">
+    <img src="assets/imgs/brasao.svg" alt="Logo TRT"
+         class="!w-16 !h-16 !rounded-full !object-cover !p-0 !shadow-md mr-4">
+    <div>
+      <mat-card-title class="!text-xl !font-bold !tracking-tight !text-white">Tribunal Regional do Trabalho
+      </mat-card-title>
+      <mat-card-subtitle class="!text-sm !text-slate-400 !font-medium !mt-1">TRT-21 • Natal-RN</mat-card-subtitle>
+    </div>
+  </mat-card-header>
+
+  <!-- Conteúdo do Formulário -->
+  <mat-card-content class="!p-8 !space-y-4 !mt-6">
+
+    <!-- Campo Nome / Usuário -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>E-Mail / Usuário</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="Digite seu usuário"
+        [(ngModel)]="name"
+      />
+    </mat-form-field>
+
+    <!-- Campo Senha -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Senha</mat-label>
+      <input matInput type="password" placeholder="••••••••" [(ngModel)]="password" />
+    </mat-form-field>
+
+    <!-- Botão de Entrar -->
+    <button
+      mat-raised-button
+      color="primary"
+      class="w-full !py-3 !bg-indigo-600 hover:!bg-indigo-700 !text-white !font-semibold !shadow-lg !shadow-indigo-200 transition-all duration-200">
+      Entrar no Sistema
+    </button>
+
+    <!-- Rodapé discreto -->
+    <p class="text-xs text-center text-slate-400 pt-2">
+      Acesso restrito a servidores e colaboradores autorizados.
+    </p>
+
+  </mat-card-content>
+</mat-card>

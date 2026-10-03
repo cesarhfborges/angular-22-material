@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
 import { FullLayoutComponent } from './shared/layouts/full-layout/full-layout.component';
+import { BasicLayoutComponent } from './shared/layouts/basic-layout/basic-layout.component';
+import { guestGuard } from './core/guards/guest-guard';
+import { authGuard } from './core/guards/auth-guard';
 
 export const routes: Routes = [
   {
@@ -11,20 +13,18 @@ export const routes: Routes = [
   {
     path: '',
     component: FullLayoutComponent,
-    children: [
-      {
-        path: 'home',
-        component: HomeComponent,
-      },
-    ],
+    canActivate: [authGuard],
+    children: [{ path: '', loadChildren: () => import('./pages/pages.routes') }],
+  },
+  {
+    path: '',
+    component: BasicLayoutComponent,
+    canActivate: [guestGuard],
+    children: [{ path: '', loadChildren: () => import('./guest/guest.routes') }],
   },
   // {
   //   path: '404',
   //   component: NotFoundComponent
-  // },
-  // {
-  //   path: 'login',
-  //   loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule)
   // },
   {
     path: '**',
