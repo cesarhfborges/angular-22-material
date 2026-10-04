@@ -1,10 +1,5 @@
-import { Component, Inject } from '@angular/core';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogRef,
-  MatDialogContent,
-  MatDialogActions,
-} from '@angular/material/dialog';
+import { Component, inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogActions, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   imports: [MatDialogContent, MatDialogActions],
@@ -17,17 +12,18 @@ export class ConfirmDialog {
   message: string | undefined;
   confirmButtonText = 'Sim';
   cancelButtonText = 'Nao';
-  constructor(
-    @Inject(MAT_DIALOG_DATA) private data: any,
-    private dialogRef: MatDialogRef<ConfirmDialog>,
-  ) {
-    if (data) {
-      if (data.message) {
-        this.message = data.message;
+
+  private readonly data = inject(MAT_DIALOG_DATA);
+  private readonly dialogRef = inject(MatDialogRef<ConfirmDialog>);
+
+  constructor() {
+    if (this.data) {
+      if (this.data.message) {
+        this.message = this.data.message;
       }
-      if (data.buttonText) {
-        this.confirmButtonText = data.buttonText.ok || this.confirmButtonText;
-        this.cancelButtonText = data.buttonText.cancel || this.cancelButtonText;
+      if (this.data.buttonText) {
+        this.confirmButtonText = this.data.buttonText.ok || this.confirmButtonText;
+        this.cancelButtonText = this.data.buttonText.cancel || this.cancelButtonText;
       }
     }
   }

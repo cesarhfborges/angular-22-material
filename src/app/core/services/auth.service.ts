@@ -1,7 +1,4 @@
-import { computed, Service, signal } from '@angular/core';
-import { Usuario } from '../models';
+import { Service } from '@angular/core';
 
 @Service()
-export class AuthService {
-
-}
+export class AuthService {}
