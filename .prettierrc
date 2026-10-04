@@ -1,6 +1,18 @@
 {
-  "printWidth": 100,
+  "printWidth": 120,
   "singleQuote": true,
+  "plugins": [
+    "prettier-plugin-organize-imports",
+    "prettier-plugin-organize-attributes",
+    "prettier-plugin-tailwindcss"
+  ],
+  "attributeGroups": [
+    "$angularStructural",
+    "$angularKey",
+    "$id",
+    "$class",
+    "$default"
+  ],
   "overrides": [
     {
       "files": "*.html",

@@ -1,7 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
-import { MatFormField, MatInput, MatLabel } from '@angular/material/input';
-import { MatButton } from '@angular/material/button';
 import {
   FormBuilder,
   FormGroup,
@@ -9,21 +6,16 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatCheckbox } from '@angular/material/checkbox';
-import { DynamicAttrDirective } from '../../shared/directives/dynamic-attr.directive';
-import { MatIcon } from '@angular/material/icon';
+import { MatDialog } from '@angular/material/dialog';
 import { MatDivider } from '@angular/material/divider';
-import {
-  MatDialog,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogRef,
-  MatDialogTitle,
-} from '@angular/material/dialog';
-import { ConfirmDialog } from '../../shared/components/confirm-dialog/confirm-dialog';
+import { MatIcon } from '@angular/material/icon';
+import { MatFormField, MatInput, MatLabel } from '@angular/material/input';
 import { environment } from '../../../environments/environment';
-import { MatRipple } from '@angular/material/core';
+import { ConfirmDialog } from '../../shared/components/confirm-dialog/confirm-dialog';
+import { DynamicAttrDirective } from '../../shared/directives/dynamic-attr.directive';
 
 @Component({
   imports: [
@@ -38,7 +30,6 @@ import { MatRipple } from '@angular/material/core';
     DynamicAttrDirective,
     MatIcon,
     MatDivider,
-    MatRipple,
   ],
   selector: 'app-auth',
   styleUrl: './auth.scss',
