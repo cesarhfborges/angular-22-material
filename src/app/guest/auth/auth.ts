@@ -1,11 +1,5 @@
 import { Component, inject } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckbox } from '@angular/material/checkbox';
@@ -14,8 +8,10 @@ import { MatDivider } from '@angular/material/divider';
 import { MatIcon } from '@angular/material/icon';
 import { MatFormField, MatInput, MatLabel } from '@angular/material/input';
 import { environment } from '../../../environments/environment';
+import { SessionService } from '../../core/services/session.service';
 import { ConfirmDialog } from '../../shared/components/confirm-dialog/confirm-dialog';
 import { DynamicAttrDirective } from '../../shared/directives/dynamic-attr.directive';
+import { Router } from '@angular/router';
 
 @Component({
   imports: [
@@ -42,6 +38,8 @@ export class Auth {
 
   private readonly fb = inject(FormBuilder);
   private readonly dialog = inject(MatDialog);
+  private readonly session = inject(SessionService);
+  private readonly router = inject(Router);
   // private readonly snackBar = inject(MatSnackBar);
 
   constructor() {
@@ -68,6 +66,8 @@ export class Auth {
     }
 
     console.log('Valido !');
+    this.session.login({id: 1, nome: 'Cesar'});
+    void this.router.navigate(['/home']);
   }
 
   logarComGov() {

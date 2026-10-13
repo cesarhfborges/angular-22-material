@@ -7,6 +7,8 @@ import {
 import { routes } from './app.routes';
 import { SessionService } from './core/services/session.service';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { authInterceptor } from './core/interceptors/auth-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,6 +18,10 @@ export const appConfig: ApplicationConfig = {
       useValue: { appearance: 'outline', floatLabel: 'always' },
     },
     provideBrowserGlobalErrorListeners(),
+    provideHttpClient(withInterceptors([
+      authInterceptor
+      // cachingInterceptor
+    ])),
     // provideRouter(routes),
     provideRouter(
       routes,
