@@ -1,18 +1,8 @@
-<!-- @if (isLoadingResults() || isRateLimitReached()) {
-<div class="example-loading-shade">
-  @if (isLoadingResults()) {
+@if (loading()) {
   <mat-spinner />
-  }
-  @if (isRateLimitReached()) {
-  <div class="example-rate-limit-reached">
-    GitHub's API rate limit has been reached. It will be reset in one minute.
-  </div>
-  }
-</div>
-} -->
+}
 
 <table mat-table [dataSource]="dataSource" class="mat-shadow-2">
-
   <!-- Checkbox Column -->
   <ng-container matColumnDef="select">
     <th mat-header-cell *matHeaderCellDef>
@@ -23,47 +13,50 @@
       <!--      </mat-checkbox>-->
     </th>
     <td mat-cell *matCellDef="let row">
-      <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
-        [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
-      </mat-checkbox>
+      <mat-checkbox
+        (click)="$event.stopPropagation()"
+        (change)="$event ? selection.toggle(row) : null"
+        [checked]="selection.isSelected(row)"
+        [aria-label]="checkboxLabel(row)"
+      ></mat-checkbox>
     </td>
   </ng-container>
 
   <!-- Position Column -->
   <ng-container matColumnDef="numeroProcesso">
-    <th mat-header-cell *matHeaderCellDef> No. </th>
-    <td mat-cell *matCellDef="let element"> {{element.numeroProcesso}} </td>
+    <th mat-header-cell *matHeaderCellDef>No.</th>
+    <td mat-cell *matCellDef="let element">{{ element.numeroProcesso }}</td>
   </ng-container>
 
   <!-- Name Column -->
   <ng-container matColumnDef="tipoAcao">
-    <th mat-header-cell *matHeaderCellDef> tipo </th>
-    <td mat-cell *matCellDef="let element"> {{element.tipoAcao}} </td>
+    <th mat-header-cell *matHeaderCellDef>tipo</th>
+    <td mat-cell *matCellDef="let element">{{ element.tipoAcao }}</td>
   </ng-container>
 
   <!-- Weight Column -->
   <ng-container matColumnDef="dataAjuizamento">
-    <th mat-header-cell *matHeaderCellDef> Data </th>
-    <td mat-cell *matCellDef="let element"> {{element.dataAjuizamento}} </td>
+    <th mat-header-cell *matHeaderCellDef>Data</th>
+    <td mat-cell *matCellDef="let element">{{ element.dataAjuizamento }}</td>
   </ng-container>
 
   <!-- Symbol Column -->
   <ng-container matColumnDef="status">
-    <th mat-header-cell *matHeaderCellDef> Status </th>
-    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+    <th mat-header-cell *matHeaderCellDef>Status</th>
+    <td mat-cell *matCellDef="let element">{{ element.status }}</td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="selection.toggle(row)"></tr>
 </table>
 
-<mat-paginator 
+<mat-paginator
   [showFirstLastButtons]="true"
   [hidePageSize]="false"
   [length]="pagination.total"
   [pageIndex]="pagination.current_page"
   [pageSize]="pagination.per_page"
-  [pageSizeOptions]="pagination.options" 
+  [pageSizeOptions]="pagination.options"
   (page)="handlePage($event)"
 ></mat-paginator>
 

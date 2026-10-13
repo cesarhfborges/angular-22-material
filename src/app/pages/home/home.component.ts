@@ -1,9 +1,10 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { AfterViewInit, Component, inject, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { IProcesso, ProcessosService } from '../../core/services/processos.service';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRippleModule } from '@angular/material/core';
 import { JsonPipe } from '@angular/common';
 
@@ -22,7 +23,7 @@ import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-home',
-  imports: [MatTableModule, MatCheckboxModule, MatPaginatorModule, MatRippleModule, JsonPipe],
+  imports: [MatTableModule, MatCheckboxModule, MatPaginatorModule, MatRippleModule, MatProgressSpinnerModule, JsonPipe],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -33,6 +34,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['select', 'numeroProcesso', 'tipoAcao', 'dataAjuizamento', 'status'];
   dataSource = new MatTableDataSource<IProcesso>([]);
   selection = new SelectionModel<IProcesso>(true, []);
+  loading = signal<boolean>(false);
 
   protected pagination = {
     current_page: 0,
@@ -68,12 +70,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
     // this.pagination.per_page = event.length;
     // this.pagination.current_page = event.pageIndex + 1;
+    this.loading.set(true);
     this.processosService.listarProcessos({page: atual, perPage: this.pagination.per_page}).then((r) => {
       console.log(r);
       this.dataSource.data = r.data;
       this.pagination.total = r.total;
       this.pagination.last_page = r.last_page;
       this.pagination.current_page = r.current_page - 1;
+      this.loading.set(false);
     });
   }
 
